@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BookController;
 use App\Http\Controllers\PustakawanController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -21,3 +22,6 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 // Route untuk menampilkan data pustakawan
 Route::get('/pustakawan', [PustakawanController::class, 'index']);
+
+// Get all resources
+Route::get('/books', [BookController::class, 'index']);
