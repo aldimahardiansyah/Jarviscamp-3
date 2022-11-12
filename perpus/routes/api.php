@@ -34,3 +34,9 @@ Route::get('/books/{id}', [BookController::class, 'show']);
 
 // Edit resource
 Route::put('/books/{id}', [BookController::class, 'update']);
+
+// Delete Resource
+Route::delete('/books/{id}', [BookController::class, 'destroy']);
+
+// Search resource by title
+Route::get('/books/search/{title}', [BookController::class, 'search']);
