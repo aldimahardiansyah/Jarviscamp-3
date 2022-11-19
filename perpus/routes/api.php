@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\PustakawanController;
 use Illuminate\Http\Request;
@@ -23,20 +24,28 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 // Route untuk menampilkan data pustakawan
 Route::get('/pustakawan', [PustakawanController::class, 'index']);
 
-// Get all resources
-Route::get('/books', [BookController::class, 'index']);
+Route::middleware('auth:sanctum')->group(function () {
+    // Get all resources
+    Route::get('/books', [BookController::class, 'index']);
 
-// Add resource
-Route::post('/books', [BookController::class, 'store']);
+    // Add resource
+    Route::post('/books', [BookController::class, 'store']);
 
-// Get detail resource
-Route::get('/books/{id}', [BookController::class, 'show']);
+    // Get detail resource
+    Route::get('/books/{id}', [BookController::class, 'show']);
 
-// Edit resource
-Route::put('/books/{id}', [BookController::class, 'update']);
+    // Edit resource
+    Route::put('/books/{id}', [BookController::class, 'update']);
 
-// Delete Resource
-Route::delete('/books/{id}', [BookController::class, 'destroy']);
+    // Delete Resource
+    Route::delete('/books/{id}', [BookController::class, 'destroy']);
 
-// Search resource by title
-Route::get('/books/search/{title}', [BookController::class, 'search']);
+    // Search resource by title
+    Route::get('/books/search/{title}', [BookController::class, 'search']);
+});
+
+// Register
+Route::post('/register', [AuthController::class, 'register']);
+
+// Login
+Route::post('/login', [AuthController::class, 'login']);

@@ -29,6 +29,14 @@ class BookController extends Controller
 
     function store(Request $request)
     {
+        $request->validate([
+            'title' => 'required',
+            'author' => 'required',
+            'publisher' => 'required',
+            'rating' => 'required | numeric',
+            'published_date' => 'required | date',
+        ]);
+
         $created = Book::create([
             'title' => $request->title,
             'author' => $request->author,
@@ -83,6 +91,11 @@ class BookController extends Controller
                 'status' => 404,
             ], 404);
         }
+
+        $request->validate([
+            'rating' => 'numeric',
+            'published_date' => 'date',
+        ]);
 
         $updated = $book->update([
             'title' => $request->title ?? $book->title,
